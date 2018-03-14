@@ -1,0 +1,55 @@
+{
+  "project_info": {
+    "project_number": "527619476288",
+    "firebase_url": "https://pontosinteresse-b4057.firebaseio.com",
+    "project_id": "pontosinteresse-b4057",
+    "storage_bucket": "pontosinteresse-b4057.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:527619476288:android:724bd753142a6907",
+        "android_client_info": {
+          "package_name": "com.example.heldersilva.pontosinteresse"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "527619476288-emloekcfmd12a7pikr35d40142jbg9c8.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.example.heldersilva.pontosinteresse",
+            "certificate_hash": "2fe9b885061f16e63243dd989da25516e1781a1d"
+          }
+        },
+        {
+          "client_id": "527619476288-6u4unu1026r5q6hc7bds5q7e2bvrqp18.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCi9wwptEDz2-dm8m-ySGNUvhed4bijKYA"
+        }
+      ],
+      "services": {
+        "analytics_service": {
+          "status": 1
+        },
+        "appinvite_service": {
+          "status": 2,
+          "other_platform_oauth_client": [
+            {
+              "client_id": "527619476288-6u4unu1026r5q6hc7bds5q7e2bvrqp18.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        },
+        "ads_service": {
+          "status": 2
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
