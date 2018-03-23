@@ -9,6 +9,7 @@ import android.location.Geocoder;
 import android.location.Location;
 import android.support.annotation.NonNull;
 import android.support.v4.app.ActivityCompat;
+import android.support.v4.app.ShareCompat;
 import android.support.v4.content.ContextCompat;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -67,7 +68,7 @@ public class MapActivity extends AppCompatActivity implements OnMapReadyCallback
     private static final LatLngBounds LAT_LNG_BOUNDS = new LatLngBounds(new LatLng(-40,-168) , new LatLng(71,136));
 
     private AutoCompleteTextView mSearchText;
-    private ImageView mGps,mInfo,mPlacePicker;
+    private ImageView mGps,mInfo,mPlacePicker,mShare;
 
     private Boolean mLocationPermissionsGranted = false;
     private GoogleMap mMap;
@@ -85,6 +86,7 @@ public class MapActivity extends AppCompatActivity implements OnMapReadyCallback
         mGps =(ImageView) findViewById(R.id.ic_gps);
         mInfo =(ImageView) findViewById(R.id.place_info);
         mPlacePicker =(ImageView) findViewById(R.id.place_picker);
+        mShare =(ImageView) findViewById(R.id.ic_share);
         getLocationPermission();
 
     }
@@ -161,6 +163,16 @@ public class MapActivity extends AppCompatActivity implements OnMapReadyCallback
                 } catch (GooglePlayServicesNotAvailableException e) {
                     Log.e(TAG, "onClick: GooglePlayServicesNotAvailableException: " + e.getMessage() );
                 }
+            }
+        });
+
+        mShare.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                String textThatYouWantToShare =
+                        "Viseitei o " +mPlace.getName().toString() ;
+
+                shareText(textThatYouWantToShare);
             }
         });
 
@@ -356,6 +368,21 @@ public class MapActivity extends AppCompatActivity implements OnMapReadyCallback
            }
        }
 
+    }
+
+    private void shareText(String textToShare) {
+
+        String mimeType = "text/plain";
+
+        String title = "Learning How to Share";
+
+        ShareCompat.IntentBuilder
+
+                .from(this)
+                .setType(mimeType)
+                .setChooserTitle(title)
+                .setText(textToShare)
+                .startChooser();
     }
 
     private void hideSoftKeyboard(){

@@ -24,15 +24,17 @@
             android:value="AIzaSyC1lOf4NXLR4cosz26Khx9SSxLh9KK2Kjk" />
 
         <activity android:name=".MainActivity">
+        </activity>
+        <activity android:name=".MapActivity" />
+        <activity android:name=".WelcomeActivity"
+            android:screenOrientation="portrait"
+            android:theme="@style/AppTheme.NoActionBar">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
-
         </activity>
-        <activity android:name=".MapActivity" />
-
     </application>
 
 </manifest>
