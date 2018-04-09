@@ -170,7 +170,7 @@ public class MapActivity extends AppCompatActivity implements OnMapReadyCallback
             @Override
             public void onClick(View view) {
                 String textThatYouWantToShare =
-                        "Viseitei o/a " +mPlace.getName().toString() + " " +mPlace.getLatlng().toString() ;
+                        "Visitei o/a " +mPlace.getName().toString() + " " +mPlace.getLatlng().toString() + " " +mPlace.getRating()  ;
 
                 shareText(textThatYouWantToShare);
             }
