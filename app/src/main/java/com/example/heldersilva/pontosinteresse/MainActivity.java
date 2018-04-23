@@ -23,7 +23,7 @@ public class MainActivity extends AppCompatActivity {
 
     private static final int ERROR_DIALOG_REQUEST=9001;
 
-    protected Button btnMap;
+    protected Button btnMap,btnVisited;
 
 
 
@@ -43,6 +43,15 @@ public class MainActivity extends AppCompatActivity {
             public void onClick(View view) {
                 Intent map = new Intent(MainActivity.this,MapActivity.class);
                 startActivity(map);
+            }
+        });
+
+        btnVisited = (Button)findViewById(R.id.btnVisited);
+        btnVisited.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent visited = new Intent(MainActivity.this,PointsvisitedActivity.class);
+                startActivity(visited);
             }
         });
     }

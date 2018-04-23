@@ -7,11 +7,11 @@
     <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" />
     <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
 
-    <!-- <uses-permission -->
-    <!-- android:name="android.permission.WRITE_EXTERNAL_STORAGE" /> -->
+     <uses-permission
+     android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
     <application
         android:allowBackup="true"
-        android:icon="@mipmap/ic_launcher"
+        android:icon="@mipmap/ic_vistpoint_icon"
         android:label="@string/app_name"
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
@@ -23,10 +23,10 @@
             android:name="com.google.android.geo.API_KEY"
             android:value="AIzaSyC1lOf4NXLR4cosz26Khx9SSxLh9KK2Kjk" />
 
-        <activity android:name=".MainActivity">
-        </activity>
+        <activity android:name=".MainActivity"></activity>
         <activity android:name=".MapActivity" />
-        <activity android:name=".WelcomeActivity"
+        <activity
+            android:name=".WelcomeActivity"
             android:screenOrientation="portrait"
             android:theme="@style/AppTheme.NoActionBar">
             <intent-filter>
@@ -35,6 +35,13 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+        <activity android:name=".PointsvisitedActivity"/>
+
+        <provider
+            android:name="com.example.heldersilva.pontosinteresse.data.CityContentProvider"
+            android:authorities="com.example.heldersilva.pontosinteresse"
+            android:exported="false"/>
+
     </application>
 
 </manifest>

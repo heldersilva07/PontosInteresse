@@ -2,11 +2,13 @@ package com.example.heldersilva.pontosinteresse;
 
 import android.*;
 import android.Manifest;
+import android.content.ContentValues;
 import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.location.Address;
 import android.location.Geocoder;
 import android.location.Location;
+import android.net.Uri;
 import android.support.annotation.NonNull;
 import android.support.v4.app.ActivityCompat;
 import android.support.v4.app.ShareCompat;
@@ -26,6 +28,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 
+import com.example.heldersilva.pontosinteresse.data.CityContract;
 import com.example.heldersilva.pontosinteresse.models.PlaceInfo;
 import com.google.android.gms.common.ConnectionResult;
 import com.google.android.gms.common.GooglePlayServicesNotAvailableException;
@@ -45,6 +48,7 @@ import com.google.android.gms.maps.CameraUpdateFactory;
 import com.google.android.gms.maps.GoogleMap;
 import com.google.android.gms.maps.OnMapReadyCallback;
 import com.google.android.gms.maps.SupportMapFragment;
+import com.google.android.gms.maps.model.BitmapDescriptorFactory;
 import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.LatLngBounds;
 import com.google.android.gms.maps.model.Marker;
@@ -55,6 +59,8 @@ import com.google.android.gms.tasks.Task;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
+
+
 
 public class MapActivity extends AppCompatActivity implements OnMapReadyCallback, GoogleApiClient.OnConnectionFailedListener {
 
@@ -68,7 +74,7 @@ public class MapActivity extends AppCompatActivity implements OnMapReadyCallback
     private static final LatLngBounds LAT_LNG_BOUNDS = new LatLngBounds(new LatLng(-40,-168) , new LatLng(71,136));
 
     private AutoCompleteTextView mSearchText;
-    private ImageView mGps,mInfo,mPlacePicker,mShare;
+    private ImageView mGps,mInfo,mPlacePicker,mShare,mSave;
 
     private Boolean mLocationPermissionsGranted = false;
     private GoogleMap mMap;
@@ -87,6 +93,7 @@ public class MapActivity extends AppCompatActivity implements OnMapReadyCallback
         mInfo =(ImageView) findViewById(R.id.place_info);
         mPlacePicker =(ImageView) findViewById(R.id.place_picker);
         mShare =(ImageView) findViewById(R.id.ic_share);
+        mSave=(ImageView)findViewById(R.id.ic_save);
         getLocationPermission();
 
     }
@@ -170,9 +177,18 @@ public class MapActivity extends AppCompatActivity implements OnMapReadyCallback
             @Override
             public void onClick(View view) {
                 String textThatYouWantToShare =
-                        "Visitei o/a " +mPlace.getName().toString() + " " +mPlace.getLatlng().toString() + " " +mPlace.getRating()  ;
+                        "Visitei o/a " +mPlace.getName().toString() + " " +mPlace.getLatlng().toString() + " Price Rating: " +mPlace.getRating()  ;
 
                 shareText(textThatYouWantToShare);
+
+
+            }
+        });
+
+        mSave.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                AddVisited();
             }
         });
 
@@ -189,6 +205,29 @@ public class MapActivity extends AppCompatActivity implements OnMapReadyCallback
                 placeResult.setResultCallback(mUpdatePlaceDetailsCallback);
             }
         }
+    }
+
+    private void AddVisited (){
+
+        String input = mSearchText.getText().toString();
+
+        if (input.length() == 0) {
+            return;
+        }
+
+
+        ContentValues contentValues = new ContentValues();
+
+        contentValues.put(CityContract.TaskEntry.COLUMN_DESCRIPTION, input);
+
+
+        Uri uri = getContentResolver().insert(CityContract.TaskEntry.CONTENT_URI, contentValues);
+
+
+        if(uri != null) {
+            Toast.makeText(getBaseContext(), uri.toString(), Toast.LENGTH_LONG).show();
+        }
+
     }
 
     private void geoLocate(){
@@ -211,7 +250,6 @@ public class MapActivity extends AppCompatActivity implements OnMapReadyCallback
             //Toast.makeText(this, address.toString(), Toast.LENGTH_SHORT).show();
 
             moveCamera(new LatLng(address.getLatitude(),address.getLongitude()),DEFAULT_ZOOM,address.getAddressLine(0));
-
 
         }
 
@@ -267,6 +305,7 @@ public class MapActivity extends AppCompatActivity implements OnMapReadyCallback
                         .position(latLng)
                         .title(placeInfo.getName())
                         .snippet(snippet);
+
                 mMarker = mMap.addMarker(options);
 
             }catch (NullPointerException e){
@@ -295,7 +334,7 @@ public class MapActivity extends AppCompatActivity implements OnMapReadyCallback
     @Override
     public void onMapReady(GoogleMap googleMap) {
         Toast.makeText(this, "Map esta Pronto", Toast.LENGTH_SHORT).show();
-        Log.d(TAG, "omMapReady : map esta pronto");
+        Log.d(TAG, "onMapReady : map esta pronto");
         mMap = googleMap;
         //mMap.setMapType(GoogleMap.MAP_TYPE_SATELLITE);
 
