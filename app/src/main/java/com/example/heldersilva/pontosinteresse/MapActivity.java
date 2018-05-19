@@ -126,8 +126,6 @@ public class MapActivity extends AppCompatActivity implements OnMapReadyCallback
                         || actionId == EditorInfo.IME_ACTION_DONE
                         || keyEvent.getAction() == KeyEvent.ACTION_DOWN
                         || keyEvent.getAction() == KeyEvent.KEYCODE_ENTER) {
-
-                    //execute our method for searching
                     geoLocate();
                 }
                 return false;
@@ -178,10 +176,7 @@ public class MapActivity extends AppCompatActivity implements OnMapReadyCallback
             public void onClick(View view) {
                 String textThatYouWantToShare =
                         "Visitei o/a " +mPlace.getName().toString() + " " +mPlace.getLatlng().toString() + " Price Rating: " +mPlace.getRating()  ;
-
                 shareText(textThatYouWantToShare);
-
-
             }
         });
 
@@ -191,7 +186,6 @@ public class MapActivity extends AppCompatActivity implements OnMapReadyCallback
                 AddVisited();
             }
         });
-
         hideSoftKeyboard();
     }
 
@@ -257,12 +251,9 @@ public class MapActivity extends AppCompatActivity implements OnMapReadyCallback
 
     private void getDeviceLocation() {
         Log.d(TAG, "getDeviceLocation: getting the devices current location");
-
         mFusedLocationProviderClient = LocationServices.getFusedLocationProviderClient(this);
-
         try {
             if (mLocationPermissionsGranted) {
-
                 final Task location = mFusedLocationProviderClient.getLastLocation();
                 location.addOnCompleteListener(new OnCompleteListener() {
                     @Override
@@ -270,10 +261,8 @@ public class MapActivity extends AppCompatActivity implements OnMapReadyCallback
                         if (task.isSuccessful()) {
                             Log.d(TAG, "onComplete: found location!");
                             Location currentLocation = (Location) task.getResult();
-
                             moveCamera(new LatLng(currentLocation.getLatitude(), currentLocation.getLongitude()),
                                     DEFAULT_ZOOM, "My Location");
-
                         } else {
                             Log.d(TAG, "onComplete: current location is null");
                             Toast.makeText(MapActivity.this, "unable to get current location", Toast.LENGTH_SHORT).show();
@@ -336,7 +325,7 @@ public class MapActivity extends AppCompatActivity implements OnMapReadyCallback
         Toast.makeText(this, "Map esta Pronto", Toast.LENGTH_SHORT).show();
         Log.d(TAG, "onMapReady : map esta pronto");
         mMap = googleMap;
-        //mMap.setMapType(GoogleMap.MAP_TYPE_SATELLITE);
+
 
         if (mLocationPermissionsGranted) {
             getDeviceLocation();
@@ -428,9 +417,7 @@ public class MapActivity extends AppCompatActivity implements OnMapReadyCallback
         this.getWindow().setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_STATE_ALWAYS_HIDDEN);
     }
 
-     /*
-        --------------------------- google places API autocomplete suggestions -----------------
-     */
+
 
      private AdapterView.OnItemClickListener mAutocompleteClickListener = new AdapterView.OnItemClickListener(){
          @Override
@@ -462,8 +449,6 @@ public class MapActivity extends AppCompatActivity implements OnMapReadyCallback
                  Log.d(TAG, "onResult: name: " + place.getName());
                  mPlace.setAddress(place.getAddress().toString());
                  Log.d(TAG, "onResult: address: " + place.getAddress());
-//                mPlace.setAttributions(place.getAttributions().toString());
-//                Log.d(TAG, "onResult: attributions: " + place.getAttributions());
                  mPlace.setId(place.getId());
                  Log.d(TAG, "onResult: id:" + place.getId());
                  mPlace.setLatlng(place.getLatLng());
