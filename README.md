@@ -5,6 +5,8 @@ Esta App direciona-se principalmente para turista,pois proporciona toda a inform
 
 Utilizaçao da Api Google Maps, Api Google Places 
 
+Implementaçao de Base de Dados (Sqlite)
+
 Splash screen(Funcionamento da App);
 
 Pesquisa de pontos de interesse(AutoComplete);
@@ -16,6 +18,8 @@ Ver informaçao do ponto de interesse selecionado;
 Reposicionamento do ponto onde se encotra caso navegue pelo mapa;
 
 Partilha nas Redes Socias dos pontos Visitados.
+
+Guardar pontos Interesse que visitou.
 
 ### Screenshots
 ![image](https://user-images.githubusercontent.com/34281481/38612754-95f753d2-3d7f-11e8-8725-cbd7da18b221.png)
