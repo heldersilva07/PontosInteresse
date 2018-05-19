@@ -37,3 +37,5 @@ Partilha nas Redes Socias dos pontos Visitados.
 ![image](https://user-images.githubusercontent.com/34281481/38612923-142e27da-3d80-11e8-87ff-f83f4cc75322.png)
 
 ![image](https://user-images.githubusercontent.com/34281481/38613096-aeb7c838-3d80-11e8-920c-51c193555893.png)
+![image](https://user-images.githubusercontent.com/34281481/40267208-eaeed8bc-5b50-11e8-9d62-f9b975b2aeb5.png)
+
